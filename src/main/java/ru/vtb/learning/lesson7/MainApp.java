@@ -3,13 +3,15 @@ package ru.vtb.learning.lesson7;
 public class MainApp {
     public static void main(String[] args) {
 
-    }
+        String url = "jdbc:sqlite:javadb.db";
+        Dal dal = new Dal(url);
 
-    public static String createScript(Class entityType){
-        if(entityType.isAnnotationPresent(AppTable.class)){
-            throw new IllegalArgumentException("Invalid class");
-        }
+        Employee employee = new Employee();
+        employee.name = "Bob";
+        employee.id = 1;
 
-        return "";
+        dal.createTable(employee.getClass());
+        dal.save(employee);
+
     }
 }
